@@ -1,0 +1,50 @@
+<form nz-form  [formGroup]="form">
+    <div class="filters-wrapper">
+        <nz-input-group [nzSize]="'large'">
+            <div nz-row [nzGutter]="8">
+              <div nz-col nzSpan="12" class="search-filter">
+                <nz-form-label nzFor="search" class="label">Search text</nz-form-label>
+                <input nz-input name="search" placeholder="Enter a search phrase" type="text" [formControl]="searchFilter" /> 
+              </div>
+              <div nz-col nzSpan="6" class="year-filter">
+                <nz-form-label nzFor="year" class="label">Year</nz-form-label>
+                <input nz-input name="year" placeholder="Enter a year to search" type="number" [formControl]="yearFilter" />
+              </div>
+              <div nz-col nzSpan="6" class="type-filter">
+                <nz-form-label nzFor="type" class="label">Type</nz-form-label>
+                <nz-select nzShowSearch nzAllowClear name="type" nzSize="large" nzPlaceHolder="Select a type"  [formControl]="typeFilter">
+                    <nz-option *ngFor="let type of types | keyvalue" [nzLabel]="type.value | titlecase" [nzValue]="type.value"></nz-option>
+                </nz-select>
+              </div>
+            </div>
+        </nz-input-group>
+    </div>
+</form>
+
+<ng-container *ngIf="($moviesList | async) as moviesList">
+    <div *ngIf="moviesList.response; else firstSearch"  class="movies-wrapper">
+        <div *ngFor="let movie of moviesList.search">
+            <div nz-card-grid >
+                <nz-card nzHoverable [nzCover]="coverTemplate" (click)="handleClick(movie)"> 
+                    <nz-card-meta nzJustify='center' [nzTitle]="movie.title" ></nz-card-meta>
+                </nz-card>
+                <ng-template #coverTemplate>
+                    <img class="movie-poster" alt="Movie poster" [src]="movie?.poster"/>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <nz-pagination *ngIf="moviesList.totalResults > 10" [nzPageIndex]="moviesService.getPage()" [nzTotal]="moviesList?.totalResults" (nzPageIndexChange)="handlePageChange($event)"></nz-pagination>
+    </div>
+    <ng-template #firstSearch>
+        <div class="first-search-wrapper">
+            <h3>Fill any filter to get result.</h3>
+        </div>
+    </ng-template>
+</ng-container>
+
+
+
+
+

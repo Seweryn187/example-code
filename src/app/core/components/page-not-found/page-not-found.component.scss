@@ -1,0 +1,11 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .page-not-found-text {
+        font-size: x-large;
+        font-weight: 500;
+    }
+}

@@ -1,0 +1,43 @@
+:host {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filters-wrapper {
+    display:flex;
+    justify-content: center;
+    background: rgba(16,142,233,1);
+    border-radius: 16px;
+    padding: 10px;
+    margin: 10px;
+    gap: 8px;
+}
+
+.movie-poster {
+    max-width: auto;
+    max-height: 330px;
+    min-width: auto;
+    min-height: 330px;
+}
+
+.type-filter {
+    .ant-select {
+        width: 100%;
+    }
+
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.first-search-wrapper {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 24px;
+}

@@ -1,0 +1,66 @@
+<ng-container *ngIf="($movieDetails | async) as movieDetails">
+  <nz-descriptions [nzTitle]="movieDetails.title" nzBordered>
+    <nz-descriptions-item nzTitle="Year">
+       {{ movieDetails.year }}
+       </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Released">
+       {{ movieDetails.released}}
+       </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Rated">
+       {{ movieDetails.rated | checkIfHaveValue}}
+       </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Metascore">
+       {{ movieDetails.metascore}}
+       </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Imdb ranting">
+       {{ movieDetails.imdbRating}}
+       </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Imdb votes">
+       {{ movieDetails.imdbVotes }}
+       </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Ratings">
+      <ng-container *ngFor="let rating of movieDetails.ratings">
+        <p> {{rating.source}} {{rating.value}} </p>
+      </ng-container>
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Runtime">
+      {{ movieDetails.runtime | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Genre">
+      {{ movieDetails.genre | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Awards">
+      {{ movieDetails.awards | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Director">
+      {{ movieDetails.director | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Actors">
+      {{ movieDetails.actors | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Language">
+      {{ movieDetails.language | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Country">
+      {{ movieDetails.country | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="type">
+      {{ movieDetails.type | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="DVD">
+      {{ movieDetails.dvd}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Box office">
+      {{ movieDetails.boxOffice | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Production">
+      {{ movieDetails.production | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Website">
+      {{ movieDetails.website | checkIfHaveValue}}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Plot">
+      {{ movieDetails.plot | checkIfHaveValue}}
+    </nz-descriptions-item>
+  </nz-descriptions>
+</ng-container>

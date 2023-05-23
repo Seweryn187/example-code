@@ -1,0 +1,45 @@
+.layout {
+    height: 100vh;
+    
+    .header {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        .app-title {
+            display: flex;
+            align-self: flex-start;
+            font-weight: bold;
+            font-size: 15px;
+            color: white;
+            a {
+                text-decoration: inherit;
+                color: inherit;
+            }
+        }
+
+        .nabvbar-link {
+            font-size: 14px;
+            color: white;
+            a {
+                text-decoration: inherit;
+                color: inherit;
+            }
+        }
+    }
+
+    .main-content {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        padding: 10px;
+        background: rgb(247, 246, 246);
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        border: 0.5px solid rgb(170, 170, 170);
+    }
+}

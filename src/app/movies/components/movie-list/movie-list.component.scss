@@ -15,18 +15,10 @@
     gap: 8px;
 }
 
-.movie-poster {
-    max-width: auto;
-    max-height: 330px;
-    min-width: auto;
-    min-height: 330px;
-}
-
 .type-filter {
     .ant-select {
         width: 100%;
     }
-
 }
 
 .pagination {
@@ -40,4 +32,18 @@
     justify-content: center;
     align-items: center;
     padding-top: 24px;
+}
+
+.movies-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+
+    @media(min-width: 800px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    @media(min-width: 1500px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
 }

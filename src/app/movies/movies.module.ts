@@ -14,12 +14,18 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { CheckIfHaveValuePipe } from './pipes/check-if-have-value.pipe';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { LastViewedMoviesComponent } from './components/last-viewed-movies/last-viewed-movies.component';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 @NgModule({
   declarations: [
     MovieListComponent,
     MovieDetailsComponent,
-    CheckIfHaveValuePipe
+    CheckIfHaveValuePipe,
+    MovieCardComponent,
+    LastViewedMoviesComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +40,9 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     NzGridModule,
     NzFormModule,
     NzDescriptionsModule,
-    NzNotificationModule
+    NzNotificationModule,
+    LayoutModule,
+    NzCarouselModule
   ]
 })
 export class MoviesModule { }

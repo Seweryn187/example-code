@@ -1,0 +1,11 @@
+<div class="movie-card">
+    <nz-card nzHoverable [nzCover]="coverTemplate" [nzBodyStyle]="{'white-space': 'break-spaces'}" (click)="handleClick(movie)"> 
+        <nz-card-meta [nzTitle]="title"></nz-card-meta>
+        <ng-template #title>
+            <span class="movie-title"> {{movie.title}} </span>
+        </ng-template>
+    </nz-card>
+    <ng-template #coverTemplate>
+        <img class="movie-poster" alt="Movie poster" [src]="movie?.poster"/>
+    </ng-template>
+</div>

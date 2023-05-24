@@ -25,7 +25,7 @@ export interface IMovie {
   title: string;
   type: string
   year: number;
-  imdbID: string;
+  imdbId: string;
 }
 
 export interface IMovieDetailsExternal {

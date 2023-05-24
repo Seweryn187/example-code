@@ -1,0 +1,8 @@
+<ng-container *ngIf="moviesService.getLastViewdMovies().length !== 0">
+    <h3>Last viewed movies:</h3>
+    <div class="box-wrapper">
+        <div *ngFor="let movie of moviesService.getLastViewdMovies()"> 
+            <app-movie-card [movie]="movie"></app-movie-card>
+        </div>
+    </div>
+</ng-container>

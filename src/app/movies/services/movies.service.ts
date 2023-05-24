@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
-import { IMovieDetails, IMovieDetailsExternal, IMovieList, IMovieListExternal, MovieTypes } from '../models/movies.models';
+import { IMovie, IMovieDetails, IMovieDetailsExternal, IMovieList, IMovieListExternal, MovieTypes } from '../models/movies.models';
 import { environment } from 'src/enviroments/environment';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { mapMovieDetails, mapMovieList } from '../helpers/movie-mappers';
@@ -20,6 +20,8 @@ export class MoviesService {
   private MOVIE_DETAILS_API_URL: string = this.BASE_API_URL + 'i=';
 
   private page: number = 1;
+
+  private lastViewdMovies: IMovie[] = [];
 
   constructor(private http: HttpClient, private notification: NzNotificationService) { }
 
@@ -51,6 +53,17 @@ export class MoviesService {
 
   public resetPage(): void {
     this.setPage(1);
+  }
+
+  public getLastViewdMovies(): IMovie[] {
+    return this.lastViewdMovies;
+  }
+
+  public addNewMovie(movie: IMovie): void {
+    if(this.lastViewdMovies.some(( {imdbId}) => imdbId === movie.imdbId)) {
+      return;
+    }
+    this.lastViewdMovies = [...this.lastViewdMovies, movie];
   }
 
   public createErrorNotyfication(error: string | undefined): void {

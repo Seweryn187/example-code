@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChange
 import { IMovie, IMovieList, MovieTypes } from '../../models/movies.models';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,11 +14,12 @@ import { Router } from '@angular/router';
 export class MovieListComponent implements OnInit {
 
   private $moviesListSubject: BehaviorSubject<IMovieList> = new BehaviorSubject<IMovieList>({} as IMovieList);
-  private destroy$: Subject<boolean> = new Subject<boolean>();
+  private $destroy: Subject<boolean> = new Subject<boolean>();
 
   public $moviesList: Observable<IMovieList> = this.$moviesListSubject.asObservable();
   public form!: FormGroup;
   public types = MovieTypes;
+  public isMobile!: boolean;
 
   get formGroup() {
     return this.form;
@@ -35,11 +37,12 @@ export class MovieListComponent implements OnInit {
     return this.form.get('typeFilter') as FormControl;
   }
 
-  constructor(public moviesService: MoviesService, private fb: FormBuilder, private router: Router){}
+  constructor(public breakpointObserver: BreakpointObserver, public moviesService: MoviesService, private fb: FormBuilder, private router: Router){}
 
   public ngOnInit(): void {
     this.prepareForm();
     this.handleFormChanges();
+    this.observeIfMobile();
   }
 
   public prepareForm(): void {
@@ -50,9 +53,18 @@ export class MovieListComponent implements OnInit {
     });
   }
 
+  public observeIfMobile(): void {
+    this.breakpointObserver
+      .observe('(max-width: 450px)')
+      .pipe(takeUntil(this.$destroy))
+      .subscribe( ({matches}) => {
+          this.isMobile = matches;
+      });
+  }
+
   public handleFormChanges(): void {
     this.formGroup.valueChanges.pipe(
-      takeUntil(this.destroy$),
+      takeUntil(this.$destroy),
       debounceTime(1000),
       distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
       tap( (_) => this.moviesService.resetPage()),
@@ -64,22 +76,18 @@ export class MovieListComponent implements OnInit {
     });
   }
 
-  public handleClick({ imdbID }: IMovie) {
-    this.router.navigate(['/movies', imdbID]);
-  }
-
   public handlePageChange(event: number) {
     this.moviesService.setPage(event);
     this.moviesService.getMovies(this.searchFilter.value, this.yearFilter.value, this.typeFilter.value).pipe(
-      takeUntil(this.destroy$), 
+      takeUntil(this.$destroy), 
     ).subscribe( (data) => {
       this.$moviesListSubject.next(data);
     });
   }
 
   public ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.$destroy.next(true);
+    this.$destroy.complete();
   }
 
 }

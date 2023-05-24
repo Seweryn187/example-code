@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs';
-import { IMovieList, MovieTypes } from '../../models/movies.models';
+import { IMovie, IMovieList, MovieTypes } from '../../models/movies.models';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import { MoviesApiService } from '../../services/movies-api.service';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  styleUrls: ['./movie-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieListComponent implements OnInit {
 
@@ -85,6 +86,9 @@ export class MovieListComponent implements OnInit {
     });
   }
 
+  trackByImdbId(index: number, movie: IMovie): string {
+    return movie.imdbID;
+  }
   public ngOnDestroy() {
     this.$destroy.next(true);
     this.$destroy.complete();

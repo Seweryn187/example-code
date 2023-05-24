@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IMovie } from '../../models/movies.models';
 import { Router } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
@@ -6,7 +6,8 @@ import { MoviesService } from '../../services/movies.service';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+  styleUrls: ['./movie-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieCardComponent {
 

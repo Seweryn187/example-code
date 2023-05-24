@@ -1,5 +1,5 @@
 import { MoviesApiService } from './../../services/movies-api.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IMovieDetails } from '../../models/movies.models';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
@@ -8,7 +8,8 @@ import { OnDestroy } from '@angular/core';
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.scss']
+  styleUrls: ['./movie-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieDetailsComponent implements OnInit, OnDestroy{
 

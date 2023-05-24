@@ -23,7 +23,7 @@
 
 <ng-container *ngIf="($moviesList | async) as moviesList">
     <div *ngIf="moviesList.response; else firstSearch"  class="movies-wrapper">
-        <div *ngFor="let movie of moviesList.search">
+        <div *ngFor="let movie of moviesList.search; trackBy: trackByImdbId">
             <app-movie-card [movie]="movie"></app-movie-card>
         </div>
     </div>

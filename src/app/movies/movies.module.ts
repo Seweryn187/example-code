@@ -18,6 +18,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { LastViewedMoviesComponent } from './components/last-viewed-movies/last-viewed-movies.component';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
     NzDescriptionsModule,
     NzNotificationModule,
     LayoutModule,
-    NzCarouselModule
+    NzCarouselModule,
+    NzLayoutModule
   ]
 })
 export class MoviesModule { }

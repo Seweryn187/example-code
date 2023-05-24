@@ -10,7 +10,7 @@ export const mapMovieList = (res: IMovieListExternal): IMovieList => {
             title: movie.Title,
             type: movie.Type,
             year: movie.Year,
-            imdbId: movie.imdbID,
+            imdbID: movie.imdbID,
             } as IMovie;
         }),
         totalResults: res.totalResults

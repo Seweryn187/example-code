@@ -16,8 +16,7 @@ export class MovieCardComponent {
 
   public handleClick(movie: IMovie) {
     this.moviesService.addNewMovie(movie);
-    console.log(this.moviesService.getLastViewdMovies());
-    this.router.navigate(['/movies', movie.imdbId]);
+    this.router.navigate(['/movies', movie.imdbID]);
   }
-  
+
 }

@@ -20,12 +20,8 @@ export interface IMovieList {
   error?: string;
 }
 
-export interface IMovie {
-  poster: string;
-  title: string;
-  type: string
-  year: number;
-  imdbId: string;
+export type IMovie = {
+  [key in keyof IMovieExternal as  Uncapitalize<key>] : IMovieExternal[key]
 }
 
 export interface IMovieDetailsExternal {
@@ -86,7 +82,7 @@ export interface IMovieDetails {
     production: string;
     website: string;
   }
-  
+
   export interface IRating {
     source: string;
     value: string;

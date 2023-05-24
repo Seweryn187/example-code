@@ -5,6 +5,7 @@ import { IMovie, IMovieList, MovieTypes } from '../../models/movies.models';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { MoviesApiService } from '../../services/movies-api.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -37,7 +38,7 @@ export class MovieListComponent implements OnInit {
     return this.form.get('typeFilter') as FormControl;
   }
 
-  constructor(public breakpointObserver: BreakpointObserver, public moviesService: MoviesService, private fb: FormBuilder, private router: Router){}
+  constructor(public breakpointObserver: BreakpointObserver, public moviesService: MoviesService, private fb: FormBuilder, private moviesApiService: MoviesApiService){}
 
   public ngOnInit(): void {
     this.prepareForm();
@@ -68,8 +69,8 @@ export class MovieListComponent implements OnInit {
       debounceTime(1000),
       distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
       tap( (_) => this.moviesService.resetPage()),
-      switchMap( ({ searchFilter, yearFilter, typeFilter}) => { 
-        return this.moviesService.getMovies(searchFilter, yearFilter, typeFilter);
+      switchMap( ({ searchFilter, yearFilter, typeFilter}) => {
+        return this.moviesApiService.getMovies(searchFilter, yearFilter, typeFilter);
       })
     ).subscribe( (data) => {
       this.$moviesListSubject.next(data);
@@ -78,8 +79,8 @@ export class MovieListComponent implements OnInit {
 
   public handlePageChange(event: number) {
     this.moviesService.setPage(event);
-    this.moviesService.getMovies(this.searchFilter.value, this.yearFilter.value, this.typeFilter.value).pipe(
-      takeUntil(this.$destroy), 
+    this.moviesApiService.getMovies(this.searchFilter.value, this.yearFilter.value, this.typeFilter.value).pipe(
+      takeUntil(this.$destroy),
     ).subscribe( (data) => {
       this.$moviesListSubject.next(data);
     });

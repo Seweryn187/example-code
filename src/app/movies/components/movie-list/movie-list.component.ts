@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs';
-import { IMovie, IMovieList, MovieTypes } from '../../models/movies.models';
+import { IMovieList, MovieTypes } from '../../models/movies.models';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { MoviesApiService } from '../../services/movies-api.service';
 

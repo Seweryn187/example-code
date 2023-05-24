@@ -10,6 +10,14 @@ describe('MovieCardComponent', () => {
   let component: MovieCardComponent;
   let fixture: ComponentFixture<MovieCardComponent>;
 
+  const mockMovie: IMovie = {
+    poster: 'test',
+    title: 'test',
+    type: 'test',
+    year: 2000,
+    imdbID: 'test',
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MovieCardComponent ],
@@ -19,8 +27,8 @@ describe('MovieCardComponent', () => {
 
     fixture = TestBed.createComponent(MovieCardComponent);
     component = fixture.componentInstance;
+    component.movie = mockMovie;
     fixture.detectChanges();
-    fixture.componentInstance.movie = { title: 'test'} as IMovie;
   });
 
   it('should create', () => {

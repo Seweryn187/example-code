@@ -65,7 +65,7 @@ export class MovieListComponent implements OnInit {
   public handleFormChanges(): void {
     this.formGroup.valueChanges.pipe(
       takeUntil(this.$destroy),
-      debounceTime(1000),
+      debounceTime(500),
       distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
       tap( (_) => this.moviesService.resetPage()),
       switchMap( ({ searchFilter, yearFilter, typeFilter}) => {
